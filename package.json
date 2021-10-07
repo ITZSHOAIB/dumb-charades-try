@@ -15,6 +15,7 @@
     "grapheme-splitter": "^1.0.4",
     "leven": "^3.1.0",
     "nanoid": "^3.1.20",
+    "peer": "^0.6.1",
     "socket.io": "^3.1.0"
   },
   "devDependencies": {
