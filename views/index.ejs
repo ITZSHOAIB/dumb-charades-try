@@ -15,6 +15,7 @@
     <script src="/socket.io/socket.io.js"></script>    
   </head>
   <body class="dark-mode">
+    <div class="sticky-alerts"></div>
     <div class="alert alert-danger filled-lm m-20 d-none" role="alert" id="camera-alert">
       <h4 class="alert-heading">CAMERA ACCESS DENIED</h4>
       Allow Camera access, if you denied mistakenly, change it from settings.
@@ -23,7 +24,7 @@
     <%- include('partials/settings', { roomID }) %>
     <%- include('partials/gameScreen') %>
     <%- include('partials/gameEndScreen') %>
-    <div class="sticky-alerts"></div>
+    
     <script src="initial-script.js"></script>
   </body>
 </html>
