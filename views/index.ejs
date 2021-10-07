@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dumb Charades</title>
+    <!-- Halfmoon CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <!-- Halfmoon JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+    <script src="https://use.fontawesome.com/47178f24ed.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>    
+  </head>
+  <body class="dark-mode">
+    <div class="alert alert-danger filled-lm m-20 d-none" role="alert" id="camera-alert">
+      <h4 class="alert-heading">CAMERA ACCESS DENIED</h4>
+      Allow Camera access, if you denied mistakenly, change it from settings.
+    </div>
+    <%- include('partials/landing', { roomID }) %>  
+    <%- include('partials/settings', { roomID }) %>
+    <%- include('partials/gameScreen') %>
+    <%- include('partials/gameEndScreen') %>
+    <div class="sticky-alerts"></div>
+    <script src="initial-script.js"></script>
+  </body>
+</html>

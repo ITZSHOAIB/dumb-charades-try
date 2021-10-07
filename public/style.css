@@ -1,0 +1,32 @@
+.landing-card{
+  width: 90%;
+  max-width: 560px;
+}
+.settings-card{
+  width: 90%;
+  max-width: 760px;
+}
+nav{
+  height: 60px!important;
+}
+.game-chat-card{
+  max-height: 45vh;
+  border: none;
+  background: rgb(0,0,0)!important;
+  background: linear-gradient(0deg, rgba(0,0,0,0.8491879350348028) 0%, rgba(0,0,0,0) 100%)!important;
+}
+#guess-input{
+  border: 2px solid rgb(255 255 255 / 42%);
+}
+.game-navbar{
+  border: none;
+  background: rgb(0,0,0)!important;
+background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6615021008403361) 100%)!important;
+}
+.timer-section{
+  border: 2px solid #d9d9d9;
+  border-radius: 10px;
+}
+#word-modal{
+  background: #191c20d9;
+}

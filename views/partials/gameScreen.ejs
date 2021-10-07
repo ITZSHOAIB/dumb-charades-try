@@ -1,0 +1,59 @@
+<div class="page-wrapper with-navbar with-sidebar container-full justify-content-center align-items-center w-full h-full d-none" id="game-screen" data-sidebar-type="overlayed-sm-and-down">
+    <nav class="navbar position-absolute top-0 left-0 z-40 game-navbar">
+      <div class="navbar-content">
+        <button id="toggle-sidebar-btn" class="btn btn-action shadow-none bg-transparent font-size-20" type="button" onclick="halfmoon.toggleSidebar()">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="navbar-content m-auto bg-transparent font-size-20 p-10 timer-section">
+        <i class='bx bx-stopwatch' ></i>
+        <span class="font-weight-bold" id="clock">0</span>
+      </div>
+      <div class="navbar-content bg-transparent font-size-20" id="my-score-content">
+        <p><b>My Score: </b>0</p>
+      </div>
+    </nav>
+    <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
+    <div class="sidebar game-sidebar">
+      <h4 class="m-20">Scoreboard</h4>
+      <div class="sidebar-content font-size-16" id="sidebar-scoreboard">
+        <!-- Scores -->
+      </div>      
+    </div>
+    <div class="content-wrapper">
+      <div class="card position-fixed h-full w-full top-0 right-0 m-0 p-0 bg-secondary" id="video-grid">
+        <!-- video section -->
+        
+      </div>
+      <div class="card p-0 d-flex flex-column w-full position-absolute bottom-0 right-0 m-0 game-chat-card">
+        <div class="chat-section flex-fill p-20 pb-0 font-size-18 overflow-y-auto" id="message-section">    
+        <!-- Messages -->
+        </div>
+        <div class="input-group input-group-lg p-15 mb-20 d-none" id="send-msg-section">
+          <input type="text" class="form-control bg-transparent" placeholder="Shoot Your Guess Here" id="guess-input">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" id="guess-input-btn">
+              <i class="bx bxs-send" ></i>
+            </button>
+          </div>
+        </div>
+        <div class="bg-primary w-full d-flex justify-content-between align-items-center" id="drawer-section">
+          <button class=" btn border rounded d-flex justify-content-center align-items-center" id="video-tool-btn" type="button" style="width: 60px; height: 60px;">
+            <i class="bx bxs-video bx-md"></i>
+          </button>
+          <div class="font-size-16 mr-20">Word: <span id="chosen-word"></span></div>
+      </div>    
+    </div>
+    
+    <div class="card position-fixed h-full w-full top-0 right-0 m-0 z-50 d-none justify-content-center align-items-center" id="word-modal">
+      <div class="card rounded shadow-lg border-0 landing-card">
+        <h2 class="card-title">Choose your word</h2>
+        <div class="input-group" id="words-section">
+          <button class="btn m-5 bg-transparent" type="button">One Boro Word Dilam Hehehe Hehehe</button>
+        </div>
+        
+      </div>
+    </div>
+    
+
+</div>
