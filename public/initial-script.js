@@ -408,7 +408,6 @@ const videoGrid = document.querySelector('#video-grid');
 function videoReadyFromUser(){  
   videoGrid.innerHTML = '';
   const myPeer = new Peer(my.id, {
-    path: "/peerjs",
     host: "dumb-io-peerjs.herokuapp.com",
     port: "9000",
     secure: true, 
