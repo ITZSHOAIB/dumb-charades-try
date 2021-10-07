@@ -87,16 +87,10 @@ class Game {
             }, []));
     }
 
-    async getPlayerPeers() {
+    async connectedToPeer() {
         const { io, socket } = this;
-        const players = Array.from(await io.in(socket.roomID).allSockets());
-
-        io.to(socket.id).emit('getPlayerPeers',
-            players.reduce((acc, id) => {
-                const { player } = io.of('/').sockets.get(id);
-                acc.push(player);
-                return acc;
-            }, []));
+        console.log('Peer diye elo', socket.id);
+        socket.to(socket.roomID).emit('connectedToPeer', socket.id);
     }
 
     getCurrentDrawer() {

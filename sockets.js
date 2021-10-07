@@ -16,7 +16,7 @@ module.exports.init = (server) => {
         socket.on('startGame', async () => { await new Game(io, socket).startGame(); });
         socket.on('message', (data) => new Game(io, socket).onMessage(data));
         socket.on('getPlayers', async () => { await new Game(io, socket).getPlayers(); });
-        socket.on('getPlayerPeers', async () => { await new Game(io, socket).getPlayerPeers(); });
+        socket.on('connectedToPeer', () => new Game(io, socket).connectedToPeer());
 
         socket.on('getCurrentDrawer', () => new Game(io, socket).getCurrentDrawer());
 
