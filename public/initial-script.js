@@ -400,26 +400,26 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   });
   console.log('Camera Access Given');
 }
-//-=------------------============-----
-let myPeer;
+
 const peers = {};
 let myVideoStream;
 const videoGrid = document.querySelector('#video-grid');
 // Function
 function videoReadyFromUser(){  
   videoGrid.innerHTML = '';
-  myPeer = new Peer(my.id, {
-    key: "peerjs",
-    host: "dumb-io-peerjs.herokuapp.com",
-    port: "443",
-    path: "/",
-    secure: true,
+  const myPeer = new Peer(my.id, {
+    host: "/",
+    port: "3001",
+    // secure: true, 
   })
 
-  videoGrid.innerHTML = 
-    `<video class="h-full w-full player-video" id="video-stream"></video>`;
-  const myVideo = document.querySelector('#video-stream')
+  const myVideo = document.createElement("video");
+  myVideo.classList.add('h-full');
+  myVideo.classList.add('w-full');
+  myVideo.classList.add('player-video');
+  myVideo.classList.add('d-none');
   myVideo.style.objectFit = 'cover';
+  myVideo.setAttribute("id", `video-stream-${my.id}`);
   myVideo.muted = true;
 
   if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -429,38 +429,61 @@ function videoReadyFromUser(){
     })
     .then((stream) => {
       myVideoStream = stream;
+      addVideoStream(myVideo, stream);
 
-      myPeer.on('call', (call) => {
-        call.answer(myVideoStream);
-        console.log('call aschhhheee', Date.now());
+      myPeer.on('call', call => {
+        call.answer(stream)
       });
 
-      socket.emit('getCurrentDrawer');
+      socket.emit('getPlayerPeers');      
+      socket.on('getPlayerPeers', (players) => {
+        for(i=0; i<players.length; i++){
+          if(players[i].id != my.id){
+            const call = myPeer.call(players[i].id, stream);
+            // Video element Creation
+            const eachPlayerVideo = document.createElement("video");
+            eachPlayerVideo.classList.add('h-full');
+            eachPlayerVideo.classList.add('w-full');
+            eachPlayerVideo.classList.add('player-video');
+            eachPlayerVideo.classList.add('d-none');
+            eachPlayerVideo.style.objectFit = 'cover';
+            eachPlayerVideo.setAttribute("id", `video-stream-${players[i].id}`);
+            eachPlayerVideo.muted = true;
+            call.on('stream', userVideoStream => {
+              addVideoStream(eachPlayerVideo, userVideoStream)
+            });
+            peers[players[i].id] = call;
+          }
+        }
+        console.log('All Videos Addeddddddd');
+        socket.emit('getCurrentDrawer');
+      });
     })
   }    
 }
 
 socket.on('getCurrentDrawer', (currentDrawer) => {
   //Video Choosing
-  if(currentDrawer == my.id){
-    document.querySelector('#video-stream').srcObject = myVideoStream;
-  }
-  if(currentDrawer !== my.id){
-    setTimeout(() => {
-      console.log('Call Estab', Date.now());
-    }, 3000);
-    const call = myPeer.call(currentDrawer, myVideoStream);
-    if(call){
-      call.on('stream', userVideoStream => {
-        console.log('ki video aschhhee', userVideoStream);
-        document.querySelector('#video-stream').srcObject = userVideoStream;
-      });
+  document.querySelectorAll('.player-video').forEach((video) => {
+    console.log(video);
+    if(!video.classList.contains('d-none'))
+      video.classList.add('d-none');
+  });
+  console.log(`#video-stream-${currentDrawer}`);
+
+  setTimeout(() => {
+    if(document.querySelector(`#video-stream-${currentDrawer}`)){
+      console.log('current drawer er video dekhiiiiiiiiiiiiiii')
+      document.querySelector(`#video-stream-${currentDrawer}`).classList.remove('d-none');
+      document.querySelector(`#video-stream-${currentDrawer}`).play();
     }
-  }
-  document.querySelector('#video-stream').play();
-      
+  }, 3000);          
 });
 
+function addVideoStream(video, stream) {
+  video.srcObject = stream;  
+  videoGrid.append(video);
+};
 
 document.querySelector('#video-tool-btn').addEventListener('click', function () {
   const enabled = myVideoStream.getVideoTracks()[0].enabled;

@@ -59,7 +59,7 @@ class Room {
             exist = true;
         }
         console.log(exist)
-        socket.emit('roomExists', {exist});
+        io.to(socket.id).emit('roomExists', {exist});
     }
   
 }
