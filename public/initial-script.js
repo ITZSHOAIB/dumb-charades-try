@@ -400,6 +400,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   });
   console.log('Camera Access Given');
 }
+//-=------------------============-----
 
 const peers = {};
 let myVideoStream;
@@ -408,10 +409,10 @@ const videoGrid = document.querySelector('#video-grid');
 function videoReadyFromUser(){  
   videoGrid.innerHTML = '';
   const myPeer = new Peer(my.id, {
-    host: "/",
-    port: "3001",
-    secure: true, 
+    host: "dumb-io-peerjs.herokuapp.com",
+    port: "9000",
   })
+  console.log(myPeer)
 
   const myVideo = document.createElement("video");
   myVideo.classList.add('h-full');
@@ -456,6 +457,7 @@ function videoReadyFromUser(){
           }
         }
         console.log('All Videos Addeddddddd');
+        console.log(myPeer)
         socket.emit('getCurrentDrawer');
       });
     })
@@ -469,7 +471,6 @@ socket.on('getCurrentDrawer', (currentDrawer) => {
     if(!video.classList.contains('d-none'))
       video.classList.add('d-none');
   });
-  console.log(`#video-stream-${currentDrawer}`);
 
   setTimeout(() => {
     if(document.querySelector(`#video-stream-${currentDrawer}`)){
