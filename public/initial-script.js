@@ -411,6 +411,7 @@ function videoReadyFromUser(){
     path: "/peerjs",
     host: "/",
     port: "443",
+    secure: true, 
   })
 
   const myVideo = document.createElement("video");
