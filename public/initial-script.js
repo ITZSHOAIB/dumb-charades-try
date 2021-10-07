@@ -408,9 +408,9 @@ const videoGrid = document.querySelector('#video-grid');
 function videoReadyFromUser(){  
   videoGrid.innerHTML = '';
   const myPeer = new Peer(my.id, {
-    host: "/",
+    host: "localhost",
     port: "3001",
-    // secure: true, 
+    secure: true, 
   })
 
   const myVideo = document.createElement("video");
