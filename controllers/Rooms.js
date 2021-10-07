@@ -58,7 +58,7 @@ class Room {
         if(games[data.id] || games[socket.roomID]){
             exist = true;
         }
-        socket.emit('roomExists', {exist});
+        io.to(socket.id).emit('roomExists', {exist});
     }
   
 }
