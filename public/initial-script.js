@@ -410,7 +410,7 @@ function videoReadyFromUser(){
   const myPeer = new Peer(my.id, {
     path: '/peerjs',
     host: "/",
-    port: "443",
+    port: "22467",
     secure: true, 
   })
 
