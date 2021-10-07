@@ -27,13 +27,13 @@ if (searchParams.has('id')) {
       window.location.href = '/';    
   });
   joinRoomBtnL.addEventListener('click', () => {
-    landingToSettings();
-    settingsAsPlayer();
+    if(landingToSettings())
+      settingsAsPlayer();
   });
 } else {
   createRoomBtnL.addEventListener('click', () => {
-    landingToSettings();
-    settingsAsOwner();
+    if(landingToSettings())
+      settingsAsOwner();
   });
 }
 function landingToSettings(){
@@ -43,13 +43,14 @@ function landingToSettings(){
       "Don't you have a name? Don't leave that box empty. Okay?",
       "alert-danger"
     );
-    return;
+    return false;
   }
   landingPage.remove();
   settingsPage.classList.remove('d-none');
   settingsPage.classList.add('d-flex');
   localStorage.setItem('playername', nameInputL.value.trim());
   my.playername = nameInputL.value.trim();
+  return true;
 }
 
 
